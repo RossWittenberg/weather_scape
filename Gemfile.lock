@@ -29,8 +29,6 @@ GEM
       thread_safe (~> 0.1)
       tzinfo (~> 1.1)
     arel (5.0.1.20140414130214)
-    backbars (0.0.11)
-      handlebars_assets
     bcrypt (3.1.9)
     builder (3.2.2)
     coderay (1.1.0)
@@ -43,11 +41,6 @@ GEM
     coffee-script-source (1.8.0)
     erubis (2.7.0)
     execjs (2.2.2)
-    handlebars_assets (0.18)
-      execjs (>= 1.2.9)
-      multi_json
-      sprockets (>= 2.0.3)
-      tilt
     hike (1.2.3)
     httparty (0.13.3)
       json (~> 1.8)
@@ -133,7 +126,6 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  backbars
   bcrypt (~> 3.1.7)
   coffee-rails (~> 4.0.0)
   httparty
