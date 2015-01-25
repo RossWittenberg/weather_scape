@@ -1,4 +1,4 @@
-var registerForm, menu, searchResultsModal, loginModal, registerModal, userViewModal, logInForm, userView, vellum;
+var registerForm, menu, searchResultsModal, searchResults, loginModal, registerModal, userViewModal, logInForm, userView, vellum;
 
 function initModals(){
 	console.log('initiate modals');
@@ -11,7 +11,7 @@ function modals() {
 	registerModal = ($(document.body)).find('#registerModal');
 	userViewModal = ($(document.body)).find('#userViewModal')
 	searchResults = $('#searchResults');
-	registerForm = $('#register');
+	registerForm = $('#registerForm');
 	logInForm = $('#logIn');
 	userView = $('#userView');
 	vellum = $('<div>').attr('id', 'vellum');
@@ -25,6 +25,10 @@ function modals() {
   $('.menuDiv').on('click', '#registerLink', generateRegister);
   $('.menuDiv').on('click', '#userViewLink', fetchUserForUserView);  
   $('.menuDiv').on('click', '.logOut', logOut);  
+  $(document.body).on('click', '.location', getWeatherForLocation)
+  $('#search-form').on('click', '#search-button', searchLocation);
+  $(document.body).on('click', '#addLocationButton', addLocation);
+  $(document.body).on('click', '#deleteLocationButton', deleteLocation);
 	fetchCurrentUser();
 
 	function fetchUserForUserView(){
@@ -49,30 +53,71 @@ function modals() {
 	}
 
 	function searchLocation(){
-		var query = $('input#searchInput').val();
+		var query = $('input#search-input').val();
 		console.log(query)
 		$.ajax({ 
-		    type: "POST",
-		    url: '/search',
+		    type: "GET",
+		    url: '/location_search',
 		    data: { query: query},
 		    success: function (data) {
 		      renderSearchResults(data)
-		    },
-		    error: function (data) {
-		    	console.log(data)
-		     	$('<p>').text("the username or password you have entered is correct. please try again").appendTo(loginModal)
-		    }  
+		    }
 		});
-		debugger;
 	}
 
 	function renderSearchResults(data){
 		console.log(data);
+		searchResults.empty();
+		var exit = $('<div>').text('x').attr('id', 'exit');
+		for (var i = 0; i < data.geonames.length; i++) {
+			var addButton = $('<button>').attr('id', 'addLocationButton')
+			$('<div>').css('font-size', '18px')
+										.attr('class', 'location')
+										.attr('name', data.geonames[i].name)
+										.attr('city', data.geonames[i].name)
+										.attr('state', data.geonames[i].adminName1)
+										.attr('country', data.geonames[i].countryCode)
+										.attr('latitude', parseFloat(data.geonames[i].lat))
+										.attr('longitude', parseFloat(data.geonames[i].lng))
+										.text( data.geonames[i].name + "  " +
+													 data.geonames[i].adminName1 + " " +
+													 data.geonames[i].countryCode + " " +	
+													 parseFloat(data.geonames[i].lat) + "  " +
+													 parseFloat(data.geonames[i].lng) )	
+										.appendTo(searchResults);
+			addButton.appendTo(searchResults);
+		};
+			searchResults.prepend(exit)							
+
+		showSearchResults();
+		$('input#search-input').val('')
+	};
+
+	function addLocation(){
+		var latitude = $(this).prev('.location').attr('latitude');
+		var longitude = $(this).prev('.location').attr('longitude');
+		var name = $(this).prev('.location').attr('name');
+		var state = $(this).prev('.location').attr('state');
+		var country = $(this).prev('.location').attr('country');
+		$.ajax({ 
+	    type: "POST",
+	    url: '/locations',
+	    data: { location: {latitude: latitude,
+							longitude: longitude,
+							name: name,
+							state: state,
+							country: country}},
+	    success: function(data) {
+	      console.log(data);
+	      hideModals()
+	      getWeatherForLocation(data)
+	    }
+		});	
+		console.log('adding location to current_user')
 	}
 
 	function generateUserView(data) {
 		console.log(data)
-		// debugger;
 	if ($('#userName').length === 0 ){
 		var userView = $('#userView');
 		userView.empty();
@@ -83,18 +128,22 @@ function modals() {
 		var locationsContainer = $('<div>').addClass('locationsContainer');
 															
 		for (var i = 0; i < data.locations.length; i++) {
-					$('<div>').bind('click', function(){
-											console.log(this);
-											renderLocation();
-										})	
-										.css('font-size', '18px')
-										.attr('id', i+1)
-										.text( data.locations[i].city + ", " +
-															 data.locations[i].state + "  " +
-															 data.locations[i].country + "  " +
-															 data.locations[i].latitude + "  " +
-															 data.locations[i].longitude )			
-										.appendTo(locationsContainer)
+			var deleteButton = $('<button>').attr('id', 'deleteLocationButton').text('delete')
+			$('<div>').css('font-size', '18px')
+								.attr('id', data.locations[i].id)
+								.attr('class', 'location')
+								.attr('name', data.locations[i].name)
+								.attr('state', data.locations[i].adminName1)
+								.attr('country', data.locations[i].countryCode)
+								.attr('latitude', data.locations[i].latitude)
+								.attr('longitude', data.locations[i].longitude)
+								.text( data.locations[i].name + ", " +
+													 data.locations[i].state + "  " +
+													 data.locations[i].country + "  " +
+													 data.locations[i].latitude + "  " +
+													 data.locations[i].longitude )	
+								.appendTo(locationsContainer)
+								deleteButton.appendTo(locationsContainer)
 		};
 		userView.append(userName)
 							 .append(locationsContainer)
@@ -125,7 +174,7 @@ function modals() {
 		showLogIn();				
 	};
 	function generateRegister(){
-		$('#register').empty();
+		$('#registerForm').empty();
 		var exit = $('<div>').text('x').attr('id', 'exit');
 		var nameLabel = $("<label>").text('username:');	
 		var regName = $('<input>').attr('id', 'regName')
@@ -148,20 +197,27 @@ function modals() {
 								.prepend(exit);
 		showRegister();						
 	};
-	// function showMenu() {
-	// 	if (menuShow === false){
-	// 		menu.hide();
-	// 		$('.menuDiv').css({ 'height': 'auto', 'opacity': '1' });
-	// 		menu.slideDown('700', "swing");
-	// 		menuShow = true;
-	// 	} 	
-	// }
+
+	function deleteLocation(){
+		var id = $(this).prev('.location').attr('id');
+		var latitude = $(this).prev().attr('latitude')
+		$.ajax({ 
+		    type: "DELETE",
+		    url: '/locations/'+id,
+		    data: { location: {latitude: latitude}},
+		    success: function (data) {
+		    	console.log(data)
+		      fetchUserForUserView()
+		    }
+		});
+	}
+
 	function hideModals(){
 		searchResultsModal.hide();
 		loginModal.hide();
 		registerModal.hide();
 		userViewModal.hide();
-		menu.show();
+		menu.slideDown('700', "swing");
 		$(vellum).css('opacity', '0');
 	};
 	function showLogIn() {
@@ -173,6 +229,16 @@ function modals() {
 		loginModal.append(logInForm);
 		loginModal.show();
 	};
+	function showSearchResults(){
+		hideModals();
+		menu.hide();
+		searchResultsModal.empty();
+		searchResults.show();
+		$(vellum).css('opacity', '.7');
+		searchResultsModal.append(searchResults);
+		searchResultsModal.show();
+	};
+
 	function showUserView() {
 		hideModals();
 		menu.hide();
@@ -232,10 +298,9 @@ function modals() {
 
 	function renderMenu(data){ 
 		($('.menuDiv')).empty();
-		console.log(data)
+		console.log(data.current_user + "!")
 		$('<h1>').text('weather scape').prependTo($('.menuDiv'));
-		// debugger;
-		if ( data.current_user && data.current_user !== "null") {
+		if ( (data.current_user && data.current_user !== "null")  ) {
 		  var loggedInUserName = $('<h2>').text(data.current_user.username).attr('id', 'userViewLink');
 		  var logOutText = $('<h2>').addClass("logOut").text('log out')
 		  $('.menuDiv').append(loggedInUserName)

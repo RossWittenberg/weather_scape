@@ -10,7 +10,7 @@ module Geonames
 		query_string = [
 			API_ROOT_URL,
 			term,
-			'&maxRows=50&orderby=relevance&username=',
+			'&maxRows=75&orderby=relevance&username=',
 			GEONAMES_USERNAME
 		].join('')
 		puts query_string
@@ -20,5 +20,3 @@ module Geonames
 	end
 
 end
-
-binding.pry

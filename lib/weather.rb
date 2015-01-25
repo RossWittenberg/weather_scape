@@ -12,6 +12,7 @@ module Weather
 			lat,
 			'&lon=',
 			lon,
+			'&units=imperial',
 			'&APPID=',
 			API_KEY
 		].join('')
@@ -21,5 +22,4 @@ module Weather
 		return HTTParty.get(query_string)
 	end
 
-binding.pry
 end
