@@ -13,4 +13,108 @@
 //= require jquery
 //= require jquery_ujs
 //= require turbolinks
+//= require underscore
+//= require backbone
+//= require handlebars
+//= require_self
+//= require_tree ./backbone/routers
+//= require_tree ./backbone/models
+//= require_tree ./backbone/collections
+//= require_tree ./backbone/views
+//= require_tree ./templates
 //= require_tree .
+var App = {
+	Models: {}, 
+	Collections: {}, 
+	Views: {}, 
+	Routers: {}
+};
+
+$(function() {	
+	init();
+	App.router = new App.Routers.Router();
+	Backbone.history.start();
+	var currentTime;
+	var currentSeason;
+});
+
+
+function init(){
+	night();
+	winter();
+	modals();
+	drawClouds(25);
+	window.addEventListener('resize', onWindowResize, false);
+};
+
+function renderLocation(){
+	console.log(this)
+}
+
+function dawn(){
+	currentTime = 'dawn';
+	drawSky("peachpuff", "palevioletred", "blueviolet" );
+	drawGrass("rgba(78, 128, 59, 1)", "rgba(143, 253, 100, 1)");
+	drawOrb();
+	console.log(currentTime)
+};
+
+function day(){
+	currentTime = 'day';
+	drawSky("royalblue", "cornflowerblue", "lightskyblue");
+	drawGrass("rgba(78, 128, 59, 1)", "rgba(143, 253, 100, 1)");
+	drawOrb("gold", "yellow", "yellow");
+	console.log(currentTime)
+};
+
+function dusk(){
+	currentTime = 'dusk';
+	drawSky("blueviolet", "palevioletred", "peachpuff");
+	drawGrass("rgba(143, 253, 100, 1)", "rgba(78, 128, 59, 1)");
+	drawOrb();
+	console.log(currentTime)
+};
+
+function night(){
+	currentTime = 'night';
+	drawSky("black", "midnightblue", "darkblue");
+	drawGrass("rgba(143, 253, 100, 1)", "rgba(78, 128, 59, 1)");
+	drawOrb("white", "gainsboro", "darkgray");
+	console.log(currentTime)
+};
+
+function winter(){
+	currentSeason = 'winter';
+	drawLeaves();
+	console.log(currentSeason)
+};
+function spring(){
+	currentSeason = 'spring';
+	drawLeaves("forestgreen", "yellowgreen", "darkolivegreen", "greenyellow");
+	console.log(currentSeason)
+};
+function summer(){
+	currentSeason = 'summer';
+	drawLeaves("forestgreen", "yellowgreen", "darkolivegreen", "greenyellow");
+	console.log(currentSeason)
+};
+function fall(){
+	currentSeason = 'fall';
+	drawLeaves("firebrick", "saddlebrown", "goldenrod", "darkorange");
+	console.log(currentSeason)
+};
+
+function onWindowResize(){
+	if (currentTime === "dawn"){
+		dawn();
+	} else if (currentTime === "day"){
+		day();
+	} else if (currentTime === "dusk"){
+		dusk();
+	} else if (currentTime === "night"){
+		night();
+	};
+	console.log('window has been resized')
+}
+
+

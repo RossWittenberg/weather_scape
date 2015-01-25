@@ -7,8 +7,31 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
+	<modal id="searchResultsModal">
+    <div id="searchResults"></div>
+  </modal>
+  <modal id="loginModal">
+    <div id="logIn"></div>
+  </modal>
+  <modal id="registerModal">
+    <div id="register"></div>
+  </modal>
+  <modal id="userViewModal">
+    <div id="userView"></div>
+  </modal>
+  
+  <div id="search-form">
+    <input type="text" id="search-input" placeholder="location" autofocus="true">
+    <button id="search-button">search</button>
+  </div>
 
-<%= yield %>
+	<canvas id="orb"></canvas>
+  <canvas id="sky"></canvas>
+  <canvas id="grass"></canvas>
+  <canvas id="clouds"></canvas>
+	<img id="tree" src="assets/tree.png"></img>
+	<canvas id="leaves"></canvas>
+	<div class="menuDiv"></div>
 
 </body>
 </html>

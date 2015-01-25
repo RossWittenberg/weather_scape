@@ -1,0 +1,54 @@
+@-webkit-keyframes orbMove { from { margin-left:0%; } to { margin-left:100%; }  }
+@-moz-keyframes orbMove { from { margin-left:0%; } to { margin-left:100%; }  }
+@-o-keyframes orbMove { from { margin-left:0%; } to { margin-left:100%; }  }
+@keyframes orbMove { from { margin-left:0%; } to { margin-left:100%; }  }
+
+#grass {
+	position: fixed;
+	bottom: 0;
+	z-index: 3;
+}
+#sky {
+	position: absolute;
+	top: 0;
+	z-index: 0;
+}
+#clouds {
+	position: absolute;
+	width: 100%;
+	height: 50%;
+	z-index: 1;
+}
+#leaves {
+	overflow: visible;
+	position: absolute;
+	border-radius: 200px;
+	right: 8%;
+	bottom: 13%;
+	width: 34%;
+	height: 50%;
+	z-index: 4;
+}
+#orb {
+	position: absolute;
+	top: 40px;
+	z-index: 2;
+
+	-webkit-animation: orbMove 600s linear 0s infinite alternate;
+  -moz-animation: orbMove 600s linear 0s infinite alternate;
+  -o-animation: orbMove 600s linear 0s infinite alternate;
+  animation: orbMove 600s linear 0s infinite alternate;
+}
+#stars {
+	display: none;
+	z-index: 1;
+}	
+
+img#tree {
+	position: absolute;
+	z-index: 2;
+	right: 10%;
+	bottom: 1.5%;
+	width: 30%;
+	height: 60%;
+}
