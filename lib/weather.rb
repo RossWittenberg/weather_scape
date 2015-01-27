@@ -3,21 +3,18 @@ require 'pry'
 
 module Weather
 
-	API_ROOT_URL = 'http://api.openweathermap.org/data/2.5/weather?lat='
-	API_KEY = ENV['WEATHER_KEY']
+	API_ROOT_URL = 'https://api.forecast.io/forecast/'
+	WEATHER_API_KEY = '4098995b9d3db933a0aecf1280951ad8'
 
 	def self.search(lat, lon)
 		query_string = [
 			API_ROOT_URL,
+			WEATHER_API_KEY,
+			'/',
 			lat,
-			'&lon=',
-			lon,
-			'&units=imperial',
-			'&APPID=',
-			API_KEY
+			',',
+			lon
 		].join('')
-		puts query_string
-
 		query_string = URI.escape(query_string)
 		return HTTParty.get(query_string)
 	end

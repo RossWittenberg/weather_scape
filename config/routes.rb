@@ -3,7 +3,9 @@ Rails.application.routes.draw do
   get '/get_current_user' => 'application#get_current_user'
  
   get '/location_search' => 'application#location_search'
-  
+	get '/random_locations' => 'locations#random'
+
+
   resources :locations, except: [:show, :edit, :new, :update]
   get '/weather_search' => 'locations#weather'
 
