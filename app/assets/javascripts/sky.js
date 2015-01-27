@@ -7,11 +7,11 @@ function drawSky(color1, color2, color3){
 	var width = skyCanvas.width;
 	var gradient = skyContext.createLinearGradient(0,0,0,width);
 	gradient.addColorStop(0, color1);
-	gradient.addColorStop(.2, color2);
+	gradient.addColorStop(.3, color2);
 	gradient.addColorStop(1, color3);
 	skyContext.fillStyle = gradient;
 	skyContext.fillRect(0,0,width,height);
-	if (currentTime === 'night'){
+	if (currentTimeOfDay === 'night'){
 		console.log('adding stars')
 		for (var i = 0; i < 100; i++) {
 			var centerX = Math.random() * width;

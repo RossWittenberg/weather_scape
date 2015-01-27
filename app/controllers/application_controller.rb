@@ -12,13 +12,13 @@ class ApplicationController < ActionController::Base
 
   def index
    if session[:current_user]
-    @current_user = User.find(session[:current_user])
-    @locations = @current_user.locations
-    response = { current_user: @current_user, locations: @locations }
-      respond_to do |format|      
-        format.json { render json: response } 
-        format.html { render layout: 'application', text: '' }
-      end  
+      @current_user = User.find(session[:current_user])
+      @locations = @current_user.locations
+      response = { current_user: @current_user, locations: @locations }
+        respond_to do |format|      
+          format.json { render json: response } 
+          format.html { render layout: 'application', text: '' }
+        end  
     else
       @current_user = nil
       @locations = Location.first

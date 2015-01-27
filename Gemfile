@@ -32,6 +32,9 @@ gem 'bcrypt', '~> 3.1.7'
 gem 'httparty'
 gem 'pry-rails', :group => :development
 
+gem 'awesome_print'
+
+
 # Use unicorn as the app server
 # gem 'unicorn'
 

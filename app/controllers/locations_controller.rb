@@ -1,9 +1,11 @@
+
 class LocationsController < ApplicationController
 	before_action :set_location, only: [:update, :destroy]
 
 	helper_method :current_user
+	
 	include Weather
-
+	
 	def index
 		if session[:current_user]
 			@current_user = User.find(session[:current_user]) if session[:current_user]
@@ -34,8 +36,15 @@ class LocationsController < ApplicationController
 	end
 
 	def weather
+		@name = params[:name]
 		@search_results = Weather.search(params[:latitude], params[:longitude])
-    render json: @search_results
+		response = { search_results: @search_results, name: @name}
+    render json: response
+	end	
+
+	def random
+		@locations = Location.all
+		render json: @locations
 	end	
 
 	def destroy

@@ -1,8 +1,8 @@
-function drawOrb(color1, color2, color3){
+function drawOrb(color){
 	var orbCanvas = document.getElementById("orb");
 	var orbContext = orbCanvas.getContext("2d");
-	orbCanvas.width = (window.innerWidth)/16;
-	orbCanvas.height = (window.innerWidth)/16;
+	orbCanvas.width = (window.innerWidth)/12;
+	orbCanvas.height = (window.innerWidth)/12;
 	
 	var height = orbCanvas.height;
 	var width = orbCanvas.width;
@@ -11,20 +11,12 @@ function drawOrb(color1, color2, color3){
   var centerY = height/2;
 	var radius = height/2;
 
-
-
-	if (! color1 ){
+	if (! color ){
 		orbContext.clearRect ( 0 , 0 , orbCanvas.width, orbCanvas.height )	
 	} else {
-	// set vars
-	// draw 
 	orbContext.beginPath();
 	orbContext.arc(centerX, centerY, radius, 0, 2 * Math.PI, false);
-	gradient = orbContext.createRadialGradient(centerX,centerY, radius, centerX,centerY,0);
-	gradient.addColorStop(0, color1);
-	gradient.addColorStop(.4, color2);
-	gradient.addColorStop(1, color3);
-	orbContext.fillStyle = gradient;
+	orbContext.fillStyle = color;
   orbContext.fill();
 }
 }

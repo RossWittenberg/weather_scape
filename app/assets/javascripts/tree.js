@@ -1,23 +1,32 @@
-function drawLeaves(color1, color2, color3, color4){
-	var leavesCanvas = document.getElementById("leaves");
-	var leavesContext = leavesCanvas.getContext("2d");
-	leavesCanvas.width = window.innerWidth;
-	leavesCanvas.height = window.innerHeight;
-	var height = leavesCanvas.height;
-	var width = leavesCanvas.width;
-	var colors = [color1, color2, color3, color4];
-	if (! color1 ){
-		leavesContext.clearRect ( 0 , 0 , leavesCanvas.width, leavesCanvas.height )	
+function drawTree(currentSeason){
+	var treeDiv = $('.treeDiv');
+	treeDiv.empty()
+	if (currentSeason === 'tropical'){
+		var palmTree = $('<img>').attr('src', 'assets/palm_tree.png')
+														 .attr('id', 'palmTree');
+		palmTree.appendTo(treeDiv);												 
+	} else if (currentSeason === 'arctic'){
+			return
 	} else {
-	for (var i = 0; i < 500; i++) {
-			var centerX = Math.random() * width;
-  		var centerY = Math.random() * height;
-			var radius = 25;
-			var color = colors[Math.floor(Math.random()*colors.length)]
-			leavesContext.beginPath();
-			leavesContext.arc(centerX, centerY, radius, 0, 2 * Math.PI, false);
-			leavesContext.fillStyle = color;
-			leavesContext.fill();
-		};
-	}	
+		var temperateTree = $('<img>').attr('src', 'assets/temperate_trees.png')
+														 .attr('id', 'temperateTrees');
+		temperateTree.appendTo(treeDiv);
+	};		
+}
+
+
+function drawLeaves(currentSeason){
+	var leavesDiv = $('#leaves');
+	leavesDiv.empty();
+	if (currentSeason === 'fall'){
+		var temperateTreeLeaves = $('<img>').attr('src', 'assets/temperate_tree_leaves_fall.png')
+														 .attr('id', 'temperateTreeLeaves');
+		temperateTreeLeaves.appendTo(leavesDiv)	
+	} else if ((currentSeason === 'spring') || (currentSeason === 'summer')) {
+		var temperateTreeLeaves = $('<img>').attr('src', 'assets/temperate_tree_leaves_summer.png')
+														 .attr('id', 'temperateTreeLeaves');
+		temperateTreeLeaves.appendTo(leavesDiv)	
+	} else{
+		return;
+	}		
 }

@@ -25,8 +25,8 @@ function modals() {
   $('.menuDiv').on('click', '#registerLink', generateRegister);
   $('.menuDiv').on('click', '#userViewLink', fetchUserForUserView);  
   $('.menuDiv').on('click', '.logOut', logOut);  
-  $(document.body).on('click', '.location', getWeatherForLocation)
-  $('#search-form').on('click', '#search-button', searchLocation);
+  $(document.body).on('click', '.location', getInfoForLocation)
+  $(document.body).on('click', '#search-button', searchLocation);
   $(document.body).on('click', '#addLocationButton', addLocation);
   $(document.body).on('click', '#deleteLocationButton', deleteLocation);
 	fetchCurrentUser();
@@ -110,10 +110,11 @@ function modals() {
 	    success: function(data) {
 	      console.log(data);
 	      hideModals()
-	      getWeatherForLocation(data)
+	      getInfoForLocation(data)
 	    }
 		});	
 		console.log('adding location to current_user')
+		fetchUserForUserView();
 	}
 
 	function generateUserView(data) {
@@ -121,33 +122,31 @@ function modals() {
 	if ($('#userName').length === 0 ){
 		var userView = $('#userView');
 		userView.empty();
-		var exit = $('<div>').text('x').attr('id', 'exit');
+		var exit = $('<div>').text('close').attr('id', 'exit');
 
 		var userName = $('<div>').attr('id', 'userName')
 															.text(data.current_user.username + "'s saved locations:");
+		userName.prependTo(userView)													
 		var locationsContainer = $('<div>').addClass('locationsContainer');
 															
 		for (var i = 0; i < data.locations.length; i++) {
-			var deleteButton = $('<button>').attr('id', 'deleteLocationButton').text('delete')
+			var deleteButton = $('<button>').attr('id', 'deleteLocationButton').text('remove location')
 			$('<div>').css('font-size', '18px')
 								.attr('id', data.locations[i].id)
 								.attr('class', 'location')
+								.attr('latitude', data.locations[i].latitude)
+								.attr('longitude', data.locations[i].longitude)
 								.attr('name', data.locations[i].name)
 								.attr('state', data.locations[i].adminName1)
 								.attr('country', data.locations[i].countryCode)
-								.attr('latitude', data.locations[i].latitude)
-								.attr('longitude', data.locations[i].longitude)
 								.text( data.locations[i].name + ", " +
 													 data.locations[i].state + "  " +
-													 data.locations[i].country + "  " +
-													 data.locations[i].latitude + "  " +
-													 data.locations[i].longitude )	
+													 data.locations[i].country )	
 								.appendTo(locationsContainer)
 								deleteButton.appendTo(locationsContainer)
 		};
-		userView.append(userName)
-							 .append(locationsContainer)
-					     .prepend(exit);
+		userView.prepend(exit);
+		userView.append(locationsContainer);
 	};		
 	showUserView();	
 };
@@ -207,55 +206,59 @@ function modals() {
 		    data: { location: {latitude: latitude}},
 		    success: function (data) {
 		    	console.log(data)
-		      fetchUserForUserView()
 		    }
 		});
+    fetchUserForUserView()
 	}
 
 	function hideModals(){
-		searchResultsModal.hide();
-		loginModal.hide();
-		registerModal.hide();
-		userViewModal.hide();
+		$(searchResultsModal).hide('slow');
+		$(loginModal).hide('slow');
+		$(registerModal).hide('slow');
+		$(userViewModal).hide('slow');
+		$('#search-form').slideDown('900', "swing")
 		menu.slideDown('700', "swing");
-		$(vellum).css('opacity', '0');
 	};
 	function showLogIn() {
 		hideModals();
 		menu.hide();
+		$('#search-form').hide('slow');
 		loginModal.empty();
 		$(vellum).css('opacity', '.7');
-		logInForm.show();
+		logInForm.show( );
 		loginModal.append(logInForm);
-		loginModal.show();
+		loginModal.show( 'slow' );
 	};
 	function showSearchResults(){
 		hideModals();
 		menu.hide();
+		$('#search-form').hide('slow');
 		searchResultsModal.empty();
 		searchResults.show();
 		$(vellum).css('opacity', '.7');
 		searchResultsModal.append(searchResults);
-		searchResultsModal.show();
+		searchResultsModal.show( 'slow' );
 	};
 
 	function showUserView() {
 		hideModals();
 		menu.hide();
+		$('#search-form').hide('slow');
 		userViewModal.empty();
 		userView.show();
 		$(vellum).css('opacity', '.7');
 		userViewModal.append(userView);
-		userViewModal.show();
+		userViewModal.show('slow');
 	};
 	function showRegister() {
 		hideModals();
 		menu.hide();
+		$('#search-form').hide('slow');
 		registerModal.empty();
 		registerForm.show();
 		$(vellum).css('opacity', '.7');
 		registerModal.append(registerForm);
-		registerModal.show();
+		registerModal.show( 'slow' );
 	};
 
 	function logOut(){
@@ -298,18 +301,45 @@ function modals() {
 
 	function renderMenu(data){ 
 		($('.menuDiv')).empty();
+		var savedLocationsDiv = $('<div>').attr('id', 'savedLocations');
+		savedLocationsDiv.empty();
 		console.log(data.current_user + "!")
+
+
+		// 									.append($('<button>'))
+		// 									.attr('id', 'search-button')
+		// 									.text('search');
+		// searchForm.appendTo($('.menuDiv'));									
+											
 		$('<h1>').text('weather scape').prependTo($('.menuDiv'));
 		if ( (data.current_user && data.current_user !== "null")  ) {
-		  var loggedInUserName = $('<h2>').text(data.current_user.username).attr('id', 'userViewLink');
+		  var welcomMessage = $('<h2>').text('hi, ' + data.current_user.username);
+		  var savedLocations = $('<h3>').text('saved locations').attr('id', 'userViewLink')
 		  var logOutText = $('<h2>').addClass("logOut").text('log out')
-		  $('.menuDiv').append(loggedInUserName)
+		  $('.menuDiv').append(welcomMessage)
 		               .append(logOutText);
+			var searchForm = $('<div>').attr('id', 'search-form')
+			 $("<input id='search-form' type='text' placeholder='location' autofocus='true' />")
+			 	.attr('id', 'search-input')
+		  	.appendTo(searchForm)
+		  	$("<button type='submit' autofocus='true'>search</button>")
+		  	.attr('id', 'search-button') 
+		  	.appendTo(searchForm)
+		  	searchForm.appendTo($('.menuDiv')) 
+		  savedLocationsDiv.append(savedLocations).appendTo($('.menuDiv')) 
 		} else {
 		  var loginLink = $('<h2>').attr('id', 'loginLink').text(' log in ')
 		  var registerLink = $('<h2>').attr('id', 'registerLink').text('register')
 		  $('.menuDiv').append(loginLink)
-		               .append(registerLink);  
+		               .append(registerLink);
+		  var searchForm = $('<div>').attr('id', 'search-form')
+			 $("<input id='search-form' type='text' placeholder='location' autofocus='true' />")
+			 	.attr('id', 'search-input')
+		  	.appendTo(searchForm)
+		  	$("<button type='submit' autofocus='true'>search</button>") 
+		  	.attr('id', 'search-button')            
+		  	.appendTo(searchForm)
+		  	searchForm.appendTo($('.menuDiv'))
 			}    
 	hideModals();
 	}
