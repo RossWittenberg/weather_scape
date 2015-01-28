@@ -45,7 +45,7 @@ function winter(temp){
 	drawLeaves();
 	console.log(currentSeason)
 	if ( temp > 40) {
-		drawGrass('darkgreen', 'green', 'spring')
+		drawGrass('darkgreen', 'green' )
 	} else {
 	drawGrass('aliceblue', 'white');
 	}
@@ -54,7 +54,7 @@ function spring(){
 	currentSeason = 'spring'
 	drawTree(currentSeason);
 	drawLeaves(currentSeason);
-	drawGrass('darkgreen', 'green', 'spring');
+	drawGrass('darkgreen', 'green', 'spring' );
 	console.log(currentSeason)
 };
 function summer(){

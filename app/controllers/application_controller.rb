@@ -46,8 +46,16 @@ class ApplicationController < ActionController::Base
   end   
 
   def location_search
-    @search_results = Geonames.search(params[:query])
-    render json: @search_results
+    if session[:current_user]  
+      @current_user = User.find(session[:current_user])
+      @search_results = Geonames.search(params[:query])
+      response = { current_user: @current_user, search_results: @search_results }
+      render json: response
+    else  
+      @search_results = Geonames.search(params[:query])
+      response = { current_user: 'null', search_results: @search_results  }
+      render json: response
+    end  
   end
 
   def authenticate
