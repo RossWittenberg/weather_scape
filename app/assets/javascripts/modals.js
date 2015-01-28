@@ -12,13 +12,12 @@ function modals() {
 	searchResults = $('#searchResults');
 	userView = $('#userView');
 	menu = $('.menuDiv');
-	$(document.body).on('click', '#exit', hideModals);
-  $(document.body).on('click', '#signIn', newCurrentUser);
-  $(document.body).on('click', '#register', newRegister);
-  $(document.body).on('click', '#searchButton', searchLocation);
   $('.menuDiv').on('click', '#loginRegisterLink', generateRegisterLogin);
   $('.menuDiv').on('click', '#userViewLink', fetchUserForUserView);  
   $('.menuDiv').on('click', '.logOut', logOut);  
+	$(document.body).on('click', '#exit', hideModals);
+  $(document.body).on('click', '#signIn', newCurrentUser);
+  $(document.body).on('click', '#register', newRegister);
   $(document.body).on('click', '.location', getInfoForLocation)
   $(document.body).on('click', '#search-button', searchLocation);
   $(document.body).on('click', '#addLocationButton', addLocation);
@@ -62,27 +61,36 @@ function modals() {
 	function renderSearchResults(data){
 		console.log(data);
 		searchResults.empty();
-		var exit = $('<div>').text('x').attr('id', 'exit');
-		userViewModal.append(exit);
-		for (var i = 0; i < data.geonames.length; i++) {
-			var addButton = $('<button>').attr('id', 'addLocationButton')
+		exit = $('<div>').text('x close').attr('id', 'exit');
+		exit.appendTo(searchResultsModal);
+		var searchResultsHeader = $('<div>').html('<h2>search results:</h2>')
+		searchResultsModal.append(searchResultsHeader)
+		for (var i = 0; i < data.search_results.geonames.length; i++) {
+			if (data.current_user !== 'null') {
+				var addButton = $('<div>').attr('id', 'addLocationButton')
+																  .text('add')
+			}									
 			$('<div>').css('font-size', '18px')
-										.attr('class', 'location')
-										.attr('name', data.geonames[i].name)
-										.attr('city', data.geonames[i].name)
-										.attr('state', data.geonames[i].adminName1)
-										.attr('country', data.geonames[i].countryCode)
-										.attr('latitude', parseFloat(data.geonames[i].lat))
-										.attr('longitude', parseFloat(data.geonames[i].lng))
-										.text( data.geonames[i].name + "  " +
-													 data.geonames[i].adminName1 + " " +
-													 data.geonames[i].countryCode + " " +	
-													 parseFloat(data.geonames[i].lat) + "  " +
-													 parseFloat(data.geonames[i].lng) )	
-										.appendTo(searchResults);
-			addButton.appendTo(searchResults);
+								.attr('class', 'location')
+								.attr('name', data.search_results.geonames[i].name)
+								.attr('city', data.search_results.geonames[i].name)
+								.attr('state', data.search_results.geonames[i].adminName1)
+								.attr('country', data.search_results.geonames[i].countryCode)
+								.attr('latitude', parseFloat(data.search_results.geonames[i].lat))
+								.attr('longitude', parseFloat(data.search_results.geonames[i].lng))
+								.text( data.search_results.geonames[i].name + ",  " +
+											 data.search_results.geonames[i].adminName1 + " " +
+											 data.search_results.geonames[i].countryCode)	
+								.appendTo(searchResults);
 		};					
-
+			if (addButton){		
+				addButton.appendTo(searchResults);
+			} else {
+				searchResultsModal.append($('<div>')
+													.attr('id', 'loginRegisterLink')
+													.text('log in to to save locations'))
+			}
+		searchResultsModal.append(searchResults);
 		showSearchResults();
 		$('input#search-input').val('')
 	};
@@ -118,14 +126,14 @@ function modals() {
 		exit.appendTo(userViewModal)
 		var userViewDiv = $('<div>').attr('id', 'userView');
 		var userName = $('<div>').attr('id', 'userName')
-															.text(data.current_user.username + "'s saved locations:");
+															.text("saved locations:");
 		userName.prependTo(userViewDiv)			
 		userViewDiv.appendTo(userViewModal)
 		var locationsContainer = $('<div>').addClass('locationsContainer');
 		locationsContainer.appendTo(userViewDiv)
 
 		for (var i = 0; i < data.locations.length; i++) {
-			var deleteButton = $('<button>').attr('id', 'deleteLocationButton').text('remove location')
+			var deleteButton = $('<div>').attr('id', 'deleteLocationButton').html('x remove<br>')
 			$('<div>').css('font-size', '18px')
 								.attr('id', data.locations[i].id)
 								.attr('class', 'location')
@@ -136,10 +144,9 @@ function modals() {
 								.attr('country', data.locations[i].countryCode)
 								.text( data.locations[i].name + ", " +
 													 data.locations[i].state + "  " +
-													 data.locations[i].country )	
-								.appendTo(locationsContainer)
-								
-								deleteButton.appendTo(locationsContainer)
+													 data.locations[i].country )
+								.append(deleteButton)					 	
+								.appendTo(locationsContainer);
 		}		
 		locationsContainer.appendTo(userViewDiv);
 		userViewDiv.appendTo(userViewModal)
@@ -220,9 +227,7 @@ function modals() {
 		hideModals();
 		menu.hide();
 		$('#search-form').hide('slow');
-		searchResultsModal.empty();
 		searchResults.show();
-		searchResultsModal.append(searchResults);
 		searchResultsModal.show( 'slow' );
 	};
 

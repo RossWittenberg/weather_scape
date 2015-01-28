@@ -39,7 +39,7 @@ function renderTempDisplay( locationName, temp, description ){
 	var tempDisplay = $('.tempDisplay');
 	tempDisplay.empty();
 	var locationName = $('<h2>').text(locationName);
-	var temp = $('<h1>').html( temp + '&#176;');
+	var temp = $('<h1>').html( Math.round(temp) + '&#176;');
 	var description = $('<p>').text(description);
 	tempDisplay.append(locationName)
 						 .append(temp)
