@@ -18,10 +18,10 @@ function modals() {
 	$(document.body).on('click', '#exit', hideModals);
   $(document.body).on('click', '#signIn', newCurrentUser);
   $(document.body).on('click', '#register', newRegister);
-  $(document.body).on('click', '.location', getInfoForLocation)
+  $(document.body).on('click', '.location', getInfoForLocation);
   $(document.body).on('click', '#search-button', searchLocation);
   $(document.body).on('click', '#addLocationButton', addLocation);
-  $(document.body).on('click', '#deleteLocationButton', deleteLocation);
+  $(document.body).on('click', '#deleteLocationButton', deleteLocation); 
 	fetchCurrentUser();
 
 	function fetchUserForUserView(){
@@ -159,7 +159,7 @@ function modals() {
 	function generateRegisterLogin(){
 		console.log('generating register/login')
 		registerLoginModal.empty()
-		registerForm = $('<div>').attr('id', 'registerForm');
+		registerinput = $('<div>').attr('id', 'registerForm');
 		loginForm = $('<div>').attr('id', 'loginForm');
 		var exit = $('<div>').text('x close').attr('id', 'exit');
 		var or = ($('<div>')).attr('id', 'or').html('<h2>or</h2>')
@@ -318,7 +318,14 @@ function modals() {
 		  	.attr('id', 'search-button')            
 		  	.appendTo(searchForm)
 		  	searchForm.appendTo($('.menuDiv'))
-			}    
+			} 
+	$("#search-form").keypress(function(e){
+  	var key = e.which;
+ 		if(key == 13){
+    	$('#search-button').click();
+    return false;  
+  	}
+	});   
 	hideModals();
 	}
 };

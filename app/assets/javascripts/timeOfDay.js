@@ -8,13 +8,13 @@ function determineTimeOfDay(timeOfDayAtLocation, offset, sunsetTime, sunriseTime
 	} else if ( ( hourOfTheClock >= sunset -1  ) && ( hourOfTheClock <= sunset + 1  )  ){
 		dusk();
 	} else if ( (hourOfTheClock > sunrise + 1 ) && ( hourOfTheClock < sunset - 1 ) ){
-		day();
+		day(hourOfTheClock);
 	} else {
 		night();
 	}
 }
 
-function dawn(){
+function dawn(hourOfTheClock){
 	currentTimeOfDay = 'dawn';
 	drawSky("peachpuff", "palevioletred", "blueviolet" );
 	drawOrb();
