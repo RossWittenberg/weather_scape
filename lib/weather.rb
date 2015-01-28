@@ -4,7 +4,7 @@ require 'pry'
 module Weather
 
 	API_ROOT_URL = 'https://api.forecast.io/forecast/'
-	WEATHER_API_KEY = '4098995b9d3db933a0aecf1280951ad8'
+	WEATHER_API_KEY = ENV['WEATHER_API_KEY']
 
 	def self.search(lat, lon)
 		query_string = [

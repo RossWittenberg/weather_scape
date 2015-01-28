@@ -9,6 +9,7 @@ class ApplicationController < ActionController::Base
   helper_method :authenticate
 
   include Geonames
+  include Weather
 
   def index
    if session[:current_user]
@@ -31,7 +32,6 @@ class ApplicationController < ActionController::Base
   end
 
  def get_current_user
-
     if session[:current_user]
       @current_user = User.find(session[:current_user])
       @locations = @current_user.locations

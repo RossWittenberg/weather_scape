@@ -78,13 +78,15 @@ function modals() {
 								.attr('longitude', parseFloat(data.search_results.geonames[i].lng))
 								.html( data.search_results.geonames[i].name + ",  " +
 											 data.search_results.geonames[i].adminName1 + " " +
-											 data.search_results.geonames[i].countryCode + '<br>' )			 	
+											 data.search_results.geonames[i].countryCode)
 								.appendTo(searchResults);
 			var addButton = $('<div>').attr('id', 'addLocationButton')
 																  .html('+ add<br>')
 			if (data.current_user !== 'null'){
-				addButton.appendTo(searchResults)
-			}												  
+				addButton.appendTo(searchResults)											  
+			} else {
+			 	addButton.appendTo(searchResults).html('<br>')	
+			}			 	
 		};					
 			if (data.current_user == 'null'){
 				addLoginRegisterLink()

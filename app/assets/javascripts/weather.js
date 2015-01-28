@@ -1,4 +1,4 @@
-var lightningInterval;
+var lightningInterval, lightningDiv;
 
 function getInfoForLocation(){
 	var longitude = $(this).attr('longitude')
@@ -18,6 +18,7 @@ function getInfoForLocation(){
 
 function renderInfoForLocation(data){
 	console.log('rendering info for location' + data )
+
 	var locationName = data.name;
 	var description = data.search_results.currently.icon;
 	var temp = data.search_results.currently.temperature;
@@ -76,9 +77,8 @@ function determineWeather( description, stormDistance, cloudCover ){
 	var clouds = cloudCover * 85;
 	var fogDiv = $('.fog');
 	fogDiv.hide();
-	var lightningDiv = $('.lightning');
-	lightningDiv.hide();
-	clearTimeout(lightningInterval)
+	lightningDiv = $('.lightning');
+	clearInterval(lightningInterval)
 
 	if ( stormDistance < 1 ){
 		storm(description);
@@ -117,7 +117,7 @@ function storm(description){
 };
 
 function lightning(){
-	var lightningDiv = $('.lightning');
+	lightningDiv = $('.lightning');
 	lightningDiv.show();
 	lightningDiv.css('z-index', '6');
 	setTimeout(function()
@@ -177,7 +177,7 @@ function heavySnow(clouds){
 	blizzardDiv.show()
 }
 
-function dayBlizzard(clouds){
+function blizzard(clouds){
 	if (clouds){
 	drawClouds(clouds, 'whitesmoke', .3)
 	} else { 
@@ -185,23 +185,11 @@ function dayBlizzard(clouds){
 	};
 	var blizzardDiv = $('.blizzard')
 	blizzardDiv.show()
-	stormDay();
+	storm('snow');
 
 	drawGrass('aliceblue', 'white');
 }
 
-function nightBlizzard(clouds){
-	if (clouds){
-	drawClouds(clouds, 'whitesmoke', .3)
-	} else { 
-	drawClouds( 75, 'whitesmoke', .3)
-	};
-	var blizzardDiv = $('.blizzard')
-	blizzardDiv.show()
-	stormNight();
-
-	drawGrass('aliceblue', 'white');
-}
 
 function rainShowers(clouds){
 	if (clouds){
