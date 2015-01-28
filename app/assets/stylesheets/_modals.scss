@@ -15,21 +15,42 @@ modal {
 		text-align: center;
 		color: firebrick;
 	}
-	#logIn {
+	#exit{
+		position: absolute;
+		top: 5%;
+		right: 5%;
+		color: firebrick;
+		font-family: Quicksand;
+		font-size: 20px;
+		&:hover {
+			color: indianred;
+			cursor: pointer;
+		}
+	}
+	#loginForm {
 		display: inline-block;
 		position: absolute;
-		top: 25%;
+		top: 15%;
 		left: 20%;
-		color: black;
+		color: dimgray;
 		opacity: 1;
 		z-index: 60;
 	}
-	#register {
+	#or{
 		display: inline-block;
 		position: absolute;
-		top: 25%;
+		top: 30%;
+		left: 53%;
+		color: dimgray;
+		opacity: 1;
+		z-index: 60;
+	}
+	#registerForm {
+		display: inline-block;
+		position: absolute;
+		top: 50%;
 		left: 20%;
-		color: black;
+		color: dimgray;
 		opacity: 1;
 		z-index: 60;
 	}
@@ -42,17 +63,19 @@ modal {
 		bottom: 15%;
 		z-index: 30;
 		#userName {
-			overflow: auto;
+			overflow: visible;
 			position: absolute;
-			top: -5%;
+			top: -10%;
 			left: 40%;
 			margin: 0 auto;
-			color: black;
+			font-size: 20px;
+			color: dimgray;
+			font-weight: 400;
 			opacity: 1;
-			width: 30%;
+			width: 75%;
 			height: 20px;
 		}
-		.locationsContainer{
+		div.locationsContainer{
 			overflow: auto;
 			position: absolute;
 			left: 40%;
@@ -61,6 +84,9 @@ modal {
 			opacity: 1;
 			width: 100%;
 			height: 75%;
+			#deleteLocationButton{
+				background-color: red;
+			}
 		}
 	}
 	#searchResults {

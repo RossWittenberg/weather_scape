@@ -1,9 +1,9 @@
-function determineSeason(month, latitude){
+function determineSeason(month, latitude, temp){
 	if (Math.abs(latitude) >= 25 && Math.abs(latitude) <= 60 ) {
 		if ( latitude > 0 )	{	
 			if ( (month >= 1 && month <= 3) || month === 12 ){
 				currentSeason = 'winter';
-				winter();
+				winter(temp);
 			} else if (month >= 4 && month <= 6) {
 				currentSeason = 'spring';
 				spring();
@@ -23,7 +23,7 @@ function determineSeason(month, latitude){
 				fall();
 			} else if (month >= 7 && month <= 8) {
 				currentSeason = 'winter';
-				winter();
+				winter(temp);
 			} else if (month >= 9 && month <= 11){
 				currentSeason = 'spring';
 				spring();
@@ -39,12 +39,16 @@ function determineSeason(month, latitude){
 	console.log("currentSeason = " + currentSeason)	
 }
 
-function winter(){
+function winter(temp){
 	currentSeason = 'winter'
 	drawTree(currentSeason);
-	drawGrass('aliceblue', 'white');
 	drawLeaves();
 	console.log(currentSeason)
+	if ( temp > 40) {
+		drawGrass('darkgreen', 'green', 'spring')
+	} else {
+	drawGrass('aliceblue', 'white');
+	}
 };
 function spring(){
 	currentSeason = 'spring'

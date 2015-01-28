@@ -45,7 +45,7 @@ Location.create({
 	latitude: 39.7618,
 	longitude: -104.8811,
 	name: "Denver",
-	state: "Colorad0",
+	state: "Colorado",
 	country: "US"
 })
 
@@ -86,7 +86,7 @@ Location.create({
 	longitude: 31.2333,
 	name: "Cairo",
 	state: "Cairo",
-	country: "DK"
+	country: "EG"
 })
 
 Location.create({

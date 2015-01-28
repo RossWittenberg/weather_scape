@@ -4,7 +4,7 @@ class SessionsController < ApplicationController
   helper_method :authenticate
 
   def create
-    @user = User.find_by(username: params[:username])
+    @user = User.find_by( username: params[:username])
     response = { current_user: @user }
     if @user.authenticate(params[:password])
       session[:current_user] = @user.id  
