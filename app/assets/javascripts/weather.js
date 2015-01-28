@@ -31,7 +31,7 @@ function renderInfoForLocation(data){
 	var sunriseTime = data.search_results.daily.data[0].sunriseTime*1000;
 	determineTimeOfDay(timeOfDayAtLocation, offset, sunsetTime, sunriseTime);
 	renderTempDisplay( locationName, temp, description );
-	determineSeason(month, latitude);
+	determineSeason(month, latitude, temp);
 	determineWeather(description, stormDistance, cloudCover );
 }
 
