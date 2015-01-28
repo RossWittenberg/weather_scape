@@ -1,4 +1,4 @@
-var registerForm, exit, menu, loginForm, searchResultsModal, searchResults, loginModal, registerModal, userViewModal ;
+var registerForm, exit, menu, loginForm, loginRegisterLink, searchResultsModal, searchResults, loginModal, registerModal, userViewModal ;
 
 function initModals(){
 	console.log('initiate modals');
@@ -12,9 +12,9 @@ function modals() {
 	searchResults = $('#searchResults');
 	userView = $('#userView');
 	menu = $('.menuDiv');
-  $('.menuDiv').on('click', '#loginRegisterLink', generateRegisterLogin);
   $('.menuDiv').on('click', '#userViewLink', fetchUserForUserView);  
   $('.menuDiv').on('click', '.logOut', logOut);  
+  $(document.body).on('click', '#loginRegisterLink', generateRegisterLogin);
 	$(document.body).on('click', '#exit', hideModals);
   $(document.body).on('click', '#signIn', newCurrentUser);
   $(document.body).on('click', '#register', newRegister);
@@ -60,6 +60,7 @@ function modals() {
 
 	function renderSearchResults(data){
 		console.log(data);
+		searchResultsModal.empty();
 		searchResults.empty();
 		exit = $('<div>').text('x close').attr('id', 'exit');
 		exit.appendTo(searchResultsModal);
@@ -78,17 +79,18 @@ function modals() {
 								.attr('country', data.search_results.geonames[i].countryCode)
 								.attr('latitude', parseFloat(data.search_results.geonames[i].lat))
 								.attr('longitude', parseFloat(data.search_results.geonames[i].lng))
-								.text( data.search_results.geonames[i].name + ",  " +
+								.html( data.search_results.geonames[i].name + ",  " +
 											 data.search_results.geonames[i].adminName1 + " " +
-											 data.search_results.geonames[i].countryCode)	
+											 data.search_results.geonames[i].countryCode + "<br>")			 	
 								.appendTo(searchResults);
 		};					
 			if (addButton){		
 				addButton.appendTo(searchResults);
 			} else {
-				searchResultsModal.append($('<div>')
+				loginRegisterLink = ($('<div>'))
 													.attr('id', 'loginRegisterLink')
-													.text('log in to to save locations'))
+													.text('log in to to save locations');
+				searchResultsModal.append(loginRegisterLink)
 			}
 		searchResultsModal.append(searchResults);
 		showSearchResults();
@@ -155,6 +157,7 @@ function modals() {
 
 
 	function generateRegisterLogin(){
+		console.log('generating register/login')
 		registerLoginModal.empty()
 		registerForm = $('<div>').attr('id', 'registerForm');
 		loginForm = $('<div>').attr('id', 'loginForm');
@@ -165,7 +168,7 @@ function modals() {
 		var loginFormPasswordInput = $("<input type='password' placeholder='password' autofocus='false' />")
 			 	.attr('id', 'password')
 		var loginFormButton = $("<button type='submit' autofocus='true'>login</button>")
-			 	.attr('id', 'signIn')	 	
+			 	.attr('id', 'signIn')		 	
 
 		loginForm.append(loginFormUsernameInput)
 						 .append(loginFormPasswordInput)
@@ -177,7 +180,7 @@ function modals() {
 			 	.attr('id', 'regPW')
 		var registerFormPasswordConfirmationInput = $("<input type='password' placeholder='confirm password' autofocus='false' />")
 			 	.attr('id', 'regPWcon')	 	
-		var registerFormButton = $("<button type='submit' autofocus='true'>register</button>")
+		var registerFormButton = $("<button type='submit' autofocus='false'>register</button>")
 			 	.attr('id', 'register')	 	
 
 		registerForm.append(registerFormUsernameInput)
@@ -296,19 +299,19 @@ function modals() {
 		  $('.menuDiv').append(welcomMessage)
 		               .append(logOutText);
 			var searchForm = $('<div>').attr('id', 'search-form')
-			 $("<input id='search-form' type='text' placeholder='location' autofocus='true' />")
+			 $("<input id='search-form' type='text' placeholder='location' autofocus='false' />")
 			 	.attr('id', 'search-input')
 		  	.appendTo(searchForm)
-		  	$("<button type='submit' autofocus='true'>search</button>")
+		  	$("<button type='submit' autofocus='false'>search</button>")
 		  	.attr('id', 'search-button') 
 		  	.appendTo(searchForm)
 		  	searchForm.appendTo($('.menuDiv')) 
 		  savedLocationsDiv.append(savedLocations).appendTo($('.menuDiv')) 
 			} else {
-			  var loginRegisterLink = $('<h2>').attr('id', 'loginRegisterLink').text(' log in / register ')
+			  loginRegisterLink = $('<h2>').attr('id', 'loginRegisterLink').text(' log in / register ')
 			  $('.menuDiv').append(loginRegisterLink);  
 		  	var searchForm = $('<div>').attr('id', 'search-form')
-				$("<input id='search-form' type='text' placeholder='location' autofocus='true' />")
+				$("<input id='search-form' type='text' placeholder='location' autofocus='false' />")
 			 	.attr('id', 'search-input')
 		  	.appendTo(searchForm)
 		  	$("<button type='submit' autofocus='true'>search</button>") 

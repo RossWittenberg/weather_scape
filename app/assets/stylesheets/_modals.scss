@@ -10,6 +10,22 @@ modal {
 	bottom: 15%;
 	left: -10%;
 	z-index: 20;
+	::-webkit-input-placeholder { /* WebKit browsers */
+    	padding: 6px;
+    	font-size: 16px
+		}
+		:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+			padding: 6px;
+			font-size: 16px
+		}
+		::-moz-placeholder { /* Mozilla Firefox 19+ */
+			padding: 6px;
+			font-size: 16px
+		}
+		:-ms-input-placeholder { /* Internet Explorer 10+ */
+			padding: 6px;
+			font-size: 16px
+		}
 	p {
 		font-size: 24px;
 		text-align: center;
@@ -27,33 +43,6 @@ modal {
 			color: indianred;
 			cursor: pointer;
 		}
-	}
-	#loginForm {
-		display: inline-block;
-		position: absolute;
-		top: 15%;
-		left: 20%;
-		color: dimgray;
-		opacity: 1;
-		z-index: 60;
-	}
-	#or{
-		display: inline-block;
-		position: absolute;
-		top: 30%;
-		left: 53%;
-		color: dimgray;
-		opacity: 1;
-		z-index: 60;
-	}
-	#registerForm {
-		display: inline-block;
-		position: absolute;
-		top: 50%;
-		left: 20%;
-		color: dimgray;
-		opacity: 1;
-		z-index: 60;
 	}
 }
 #userViewModal {
@@ -158,9 +147,115 @@ modal {
 		left: 20%;
 		font-size: 16px;
 		color: dimgray;
+		z-index: 80;
 		&:hover{
 				color: forestgreen;
 				cursor: pointer;
-			}
+		}
 	}	
 }
+#registerLoginModal{
+	width: 35%;
+	height: 75%;
+	bottom: 14%;
+	left: -5%;	
+	#loginForm {
+		display: inline-block;
+		position: absolute;
+		top: 12%;
+		width: 50%;
+		margin: 0 auto;
+		left: 23%;
+		color: dimgray;
+		opacity: 1;
+		z-index: 60;
+		button {
+			border-radius: 8px;
+			font-weight: 400;
+			font-family: Quicksand;
+			font-size: 24px;
+			background-color: transparent;
+			color: dimgray;
+			border: none;
+			text-align: center;
+			&:hover{
+				background-color: forestgreen;
+				color: whitesmoke;
+				cursor: pointer;
+			}
+		}
+		input {
+			border-radius: 8px;
+			display: block;
+			font-family: Quicksand;
+			font-weight: 300;
+			font-size: 24px;
+			margin: 12px 0;
+			background-color: transparent;
+			border: 1px solid dimgray;
+			color: dimgray;
+		}
+	}
+	#or{
+		font-weight: 400;
+		font-family: Quicksand;
+		font-size: 24px;
+		display: inline-block;
+		position: relative;
+		top: 39%;
+		left: 50%;
+		h2 {
+			font-weight: 400;
+			font-family: Quicksand;
+			font-size: 24px;
+			color: dimgray;
+		}
+	}
+	#registerForm {
+		display: inline-block;
+		position: absolute;
+		top: 53%;
+		width: 50%;
+		margin: 0 auto;
+		left: 23%;
+		color: dimgray;
+		opacity: 1;
+		z-index: 60;
+		input {
+			border-radius: 8px;
+			display: block;
+			font-family: Quicksand;
+			font-weight: 300;
+			font-size: 24px;
+			margin: 12px 0;
+			background-color: transparent;
+			border: 1px solid dimgray;
+			color: dimgray;
+		}	
+		button {
+			border-radius: 8px;
+			font-weight: 400;
+			font-family: Quicksand;
+			font-size: 24px;
+			border: none;
+			background-color: transparent;
+			color: dimgray;
+			text-align: center;
+			&:hover{
+				background-color: forestgreen;
+				color: whitesmoke;
+				cursor: pointer;
+			}
+		}
+	}	
+}
+
+
+
+
+
+
+
+
+
+
