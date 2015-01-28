@@ -67,10 +67,7 @@ function modals() {
 		var searchResultsHeader = $('<div>').html('<h2>search results:</h2>')
 		searchResultsModal.append(searchResultsHeader)
 		for (var i = 0; i < data.search_results.geonames.length; i++) {
-			if (data.current_user !== 'null') {
-				var addButton = $('<div>').attr('id', 'addLocationButton')
-																  .text('add')
-			}									
+
 			$('<div>').css('font-size', '18px')
 								.attr('class', 'location')
 								.attr('name', data.search_results.geonames[i].name)
@@ -81,21 +78,29 @@ function modals() {
 								.attr('longitude', parseFloat(data.search_results.geonames[i].lng))
 								.html( data.search_results.geonames[i].name + ",  " +
 											 data.search_results.geonames[i].adminName1 + " " +
-											 data.search_results.geonames[i].countryCode + "<br>")			 	
+											 data.search_results.geonames[i].countryCode + '<br>' )			 	
 								.appendTo(searchResults);
+			var addButton = $('<div>').attr('id', 'addLocationButton')
+																  .html('+ add<br>')
+			if (data.current_user !== 'null'){
+				addButton.appendTo(searchResults)
+			}												  
 		};					
-			if (addButton){		
-				addButton.appendTo(searchResults);
-			} else {
-				loginRegisterLink = ($('<div>'))
-													.attr('id', 'loginRegisterLink')
-													.text('log in to to save locations');
-				searchResultsModal.append(loginRegisterLink)
-			}
+			if (data.current_user == 'null'){
+				addLoginRegisterLink()
+			} 
 		searchResultsModal.append(searchResults);
 		showSearchResults();
 		$('input#search-input').val('')
 	};
+
+	function addLoginRegisterLink(){
+		console.log('no user')
+		loginRegisterLink = ($('<div>'))
+											.attr('id', 'loginRegisterLink')
+											.text('log in to to save locations');
+		searchResultsModal.append(loginRegisterLink)	
+	}
 
 	function addLocation(){
 		var latitude = $(this).prev('.location').attr('latitude');
@@ -113,7 +118,7 @@ function modals() {
 							country: country}},
 	    success: function(data) {
 	      console.log(data);
-	      hideModals()
+	      menu.hide();
 	      getInfoForLocation(data)
 	    }
 		});	
@@ -159,7 +164,7 @@ function modals() {
 	function generateRegisterLogin(){
 		console.log('generating register/login')
 		registerLoginModal.empty()
-		registerinput = $('<div>').attr('id', 'registerForm');
+		registerForm = $('<div>').attr('id', 'registerForm');
 		loginForm = $('<div>').attr('id', 'loginForm');
 		var exit = $('<div>').text('x close').attr('id', 'exit');
 		var or = ($('<div>')).attr('id', 'or').html('<h2>or</h2>')
@@ -197,7 +202,7 @@ function modals() {
 	};
 
 	function deleteLocation(){
-		var id = $(this).prev('.location').attr('id');
+		var id = $(this).closest('.location').attr('id');
 		var latitude = $(this).prev().attr('latitude')
 		$.ajax({ 
 		    type: "DELETE",
