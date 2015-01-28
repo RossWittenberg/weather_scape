@@ -180,7 +180,7 @@ function modals() {
 			 	.attr('id', 'regPW')
 		var registerFormPasswordConfirmationInput = $("<input type='password' placeholder='confirm password' autofocus='false' />")
 			 	.attr('id', 'regPWcon')	 	
-		var registerFormButton = $("<button type='submit' autofocus='false'>register</button>")
+		var registerFormButton = $("<button type='submit' autofocus='falser'>register</button>")
 			 	.attr('id', 'register')	 	
 
 		registerForm.append(registerFormUsernameInput)
@@ -299,10 +299,10 @@ function modals() {
 		  $('.menuDiv').append(welcomMessage)
 		               .append(logOutText);
 			var searchForm = $('<div>').attr('id', 'search-form')
-			 $("<input id='search-form' type='text' placeholder='location' autofocus='false' />")
+			 $("<input id='search-form' type='text' placeholder='location' autofocus='falser' />")
 			 	.attr('id', 'search-input')
 		  	.appendTo(searchForm)
-		  	$("<button type='submit' autofocus='false'>search</button>")
+		  	$("<button type='submit' autofocus='falser'>search</button>")
 		  	.attr('id', 'search-button') 
 		  	.appendTo(searchForm)
 		  	searchForm.appendTo($('.menuDiv')) 
@@ -311,7 +311,7 @@ function modals() {
 			  loginRegisterLink = $('<h2>').attr('id', 'loginRegisterLink').text(' log in / register ')
 			  $('.menuDiv').append(loginRegisterLink);  
 		  	var searchForm = $('<div>').attr('id', 'search-form')
-				$("<input id='search-form' type='text' placeholder='location' autofocus='false' />")
+				$("<input id='search-form' type='text' placeholder='location' autofocus='falser' />")
 			 	.attr('id', 'search-input')
 		  	.appendTo(searchForm)
 		  	$("<button type='submit' autofocus='true'>search</button>") 

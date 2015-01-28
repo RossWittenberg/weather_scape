@@ -108,6 +108,12 @@ body {
 		margin: 0;
 		position: fixed;
 		top: 101px;
+		h3{
+			&:hover{
+					color: forestgreen;
+					cursor: pointer;
+			}
+		}
 	}	
 	#search-form{
 		input {
