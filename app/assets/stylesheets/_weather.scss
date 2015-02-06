@@ -44,9 +44,9 @@
 .snow{
 	display: none;
 	background: none;
-	background-image: url('/assets/snow_1.png'), 
-										url('/assets/snow_2.png'), 
-										url('/assets/snow_3.png');
+	background-image: image-url('snow_1.png'), 
+										image-url('snow_2.png'), 
+										image-url('snow_3.png');
 	height: 100%;
 	left: 0;
 	position: absolute;
@@ -70,10 +70,10 @@
 .blizzard{
 	display: none;
 	background: none;
-	background-image: url('/assets/snow_1.png'), 
-										url('/assets/snow_2.png'), 
-										url('/assets/snow_3.png'),
-										url('/assets/snow_4.png');
+	background-image: image-url('snow_1.png'), 
+										image-url('snow_2.png'), 
+										image-url('snow_3.png'),
+										image-url('snow_4.png');
 	height: 100%;
 	left: 0;
 	position: absolute;

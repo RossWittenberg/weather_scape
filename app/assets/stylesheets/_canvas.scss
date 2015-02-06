@@ -55,7 +55,8 @@ img#flowers{
 	height: 9%;
 	z-index: 18;
 }
-img#temperateTrees {
+#temperateTrees {
+	background-color: red;
 	position: absolute;
 	right: 5%;
 	bottom: 2%;
@@ -63,7 +64,8 @@ img#temperateTrees {
 	height: 50%;
 	z-index: 7;
 }
-img#palmTree {
+#palmTree {
+	background-color: green;
 	position: absolute;
 	z-index: 7;
 	right: 10%;
@@ -71,7 +73,8 @@ img#palmTree {
 	width: 18%;
 	height: 42%;
 }
-img#temperateTreeLeaves {
+#temperateTreeLeaves {
+	background-color: yellow;
 	position: absolute;
 	z-index: 8;
 	left: 11.1%;

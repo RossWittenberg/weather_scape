@@ -27,11 +27,10 @@ function drawGrass(color1, color2, currentSeason){
 	grassContext.fillStyle = color2;
 	grassContext.fill(); 
  	if ( currentSeason === 'spring' ){
- 		var flowers = $('<img>')
+ 		var flowers = $('<div>')
  		flowers.empty();
- 		flowers.attr('id', 'flowers').attr({
- 			id: 'flowers',
- 			src: 'assets/flowers.png'
+ 		flowers.attr('id', 'flowers').css({
+ 			background-image: "image-url('assets/flowers.png')"
  		});
 		flowers.appendTo($(document.body));	
  	}
