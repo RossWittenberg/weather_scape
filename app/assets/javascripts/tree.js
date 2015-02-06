@@ -9,6 +9,7 @@ function drawTree(currentSeason){
 			return
 	} else {
 		var temperateTree = $('<div>').css('background-image', "image-url('temperate_trees.png')")
+
 														 .attr('id', 'temperateTrees');
 		temperateTree.appendTo(treeDiv);
 	};		
