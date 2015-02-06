@@ -8,7 +8,7 @@ function drawTree(currentSeason){
 	} else if (currentSeason === 'arctic'){
 			return
 	} else {
-		var temperateTree = $('<div>').attr('background-image', "image_url('temperate_trees.png')")
+		var temperateTree = $('<div>').css('background-image', "image_url('temperate_trees.png')")
 														 .attr('id', 'temperateTrees');
 		temperateTree.appendTo(treeDiv);
 	};		
@@ -19,11 +19,11 @@ function drawLeaves(currentSeason){
 	var leavesDiv = $('#leaves');
 	leavesDiv.empty();
 	if (currentSeason === 'fall'){
-		var temperateTreeLeaves = $('<div>').attr('background-image', "image_url('temperate_tree_leaves_fall.png')")
+		var temperateTreeLeaves = $('<div>').css('background-image', "image_url('temperate_tree_leaves_fall.png')")
 														 .attr('id', 'temperateTreeLeaves');
 		temperateTreeLeaves.appendTo(leavesDiv)	
 	} else if ((currentSeason === 'spring') || (currentSeason === 'summer')) {
-		var temperateTreeLeaves = $('<div>').attr('background-image', "image_url('temperate_tree_leaves_summer.png')")
+		var temperateTreeLeaves = $('<div>').css('background-image', "image_url('temperate_tree_leaves_summer.png')")
 														 .attr('id', 'temperateTreeLeaves');
 		temperateTreeLeaves.appendTo(leavesDiv)	
 	} else{
