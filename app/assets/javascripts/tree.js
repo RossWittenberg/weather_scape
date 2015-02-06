@@ -23,7 +23,7 @@ function drawLeaves(currentSeason){
 														 .attr('id', 'temperateTreeLeaves');
 		temperateTreeLeaves.appendTo(leavesDiv)	
 	} else if ((currentSeason === 'spring') || (currentSeason === 'summer')) {
-		var temperateTreeLeaves = $('<img>').attr('src', 'assets/temperate_tree_leaves_summer-885f9ef4ea4231518b2c28375ee9351f.png.png')
+		var temperateTreeLeaves = $('<img>').attr('src', 'assets/temperate_tree_leaves_summer-885f9ef4ea4231518b2c28375ee9351f.png')
 														 .attr('id', 'temperateTreeLeaves');
 		temperateTreeLeaves.appendTo(leavesDiv)	
 	} else{
