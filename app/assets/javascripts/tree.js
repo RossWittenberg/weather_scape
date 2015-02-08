@@ -1,6 +1,7 @@
 function drawTree(currentSeason){
 	var treeDiv = $('.treeDiv');
-	treeDiv.empty()
+	treeDiv.empty();
+	debugger;
 	if (currentSeason === 'tropical'){
 		var palmTree = $('<img>').attr({
 			src: 'assets/palm_tree-a823538f31f348009b2acdcd65ccd19f.png',
@@ -16,19 +17,21 @@ function drawTree(currentSeason){
 		});
 		temperateTree.appendTo(treeDiv);
 	};		
-}
-
-
+};
 function drawLeaves(currentSeason){
 	var leavesDiv = $('#leaves');
 	leavesDiv.empty();
 	if (currentSeason === 'fall'){
-		var temperateTreeLeaves = $('<img>').setAttribute('src', 'assets/temperate_tree_leaves_fall-cb7f9ff9fce84d763e7f253ab047e218.png')
-														 .setAttribute('id', 'temperateTreeLeaves');
+		var temperateTreeLeaves = $('<img>').attr({
+			src: 'assets/temperate_tree_leaves_fall-cb7f9ff9fce84d763e7f253ab047e218.png',
+			id: 'temperateTreeLeaves'
+		});
 		temperateTreeLeaves.appendTo(leavesDiv)	
 	} else if ((currentSeason === 'spring') || (currentSeason === 'summer')) {
-		var temperateTreeLeaves = $('<img>').setAttribute('src', 'assets/temperate_tree_leaves_summer-885f9ef4ea4231518b2c28375ee9351f.png')
-														 .setAttribute('id', 'temperateTreeLeaves');
+		var temperateTreeLeaves = $('<img>').attr({
+			src: 'assets/temperate_tree_leaves_summer-885f9ef4ea4231518b2c28375ee9351f.png',
+			id: 'temperateTreeLeaves'
+		});
 		temperateTreeLeaves.appendTo(leavesDiv)	
 	} else{
 		return;
