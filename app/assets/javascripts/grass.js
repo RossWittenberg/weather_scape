@@ -29,7 +29,7 @@ function drawGrass(color1, color2, currentSeason){
  	if ( currentSeason === 'spring' ){
  		var flowers = $('<img>')
  		flowers.empty();
- 		flowers.setAttribute('id', 'flowers').setAttribute("src", 'assets/flowers-cded70527bbcf70d5155c693c87cbdf0.png');
+ 		flowers.attr('id', 'flowers').attr("src", 'assets/flowers-cded70527bbcf70d5155c693c87cbdf0.png');
 		flowers.appendTo($(document.body));	
  	}
 };
