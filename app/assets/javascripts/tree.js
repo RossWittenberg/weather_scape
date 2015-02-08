@@ -1,12 +1,9 @@
 function drawTree(currentSeason){
 	var treeDiv = $('.treeDiv');
 	treeDiv.empty();
-	debugger;
 	if (currentSeason === 'tropical'){
-		var palmTree = $('<img>').attr({
-			src: 'assets/palm_tree-a823538f31f348009b2acdcd65ccd19f.png',
-			id: 'palmTree'
-		});
+		var palmTree = $("<img src='assets/palm_tree-a823538f31f348009b2acdcd65ccd19f.png'>")
+		.attr({ id: 'palmTree' });
 		palmTree.appendTo(treeDiv);												 
 	} else if (currentSeason === 'arctic'){
 			return
