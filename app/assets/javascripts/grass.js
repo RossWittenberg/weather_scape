@@ -26,10 +26,12 @@ function drawGrass(color1, color2, currentSeason){
 	grassContext.quadraticCurveTo(width*(2/3), 0, width*1.5, bottom);
 	grassContext.fillStyle = color2;
 	grassContext.fill(); 
+ 	
  	if ( currentSeason === 'spring' ){
- 		var flowers = $('<img>')
+ 		var flowers = $('<img>');
  		flowers.empty();
- 		flowers.attr('id', 'flowers').attr("src", 'assets/flowers-cded70527bbcf70d5155c693c87cbdf0.png');
+ 		flowers.attr({id: 'flowers', 
+ 									src: 'assets/flowers-cded70527bbcf70d5155c693c87cbdf0.png'});
 		flowers.appendTo($(document.body));	
  	}
 };
