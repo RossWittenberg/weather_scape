@@ -1,4 +1,4 @@
-var registerForm, exit, menu, loginForm, loginRegisterLink, searchResultsModal, searchResults, loginModal, registerModal, userViewModal ;
+var registerForm, demoModal, exit, menu, loginForm, loginRegisterLink, searchResultsModal, searchResults, loginModal, registerModal, userViewModal ;
 
 function initModals(){
 	console.log('initiate modals');
@@ -11,6 +11,8 @@ function modals() {
 	userViewModal = ($(document.body)).find('#userViewModal');
 	searchResults = $('#searchResults');
 	userView = $('#userView');
+	demoModal = $('#demoModal');
+	demo = $('#demo');
 	menu = $('.menuDiv');
   $('.menuDiv').on('click', '#userViewLink', fetchUserForUserView);  
   $('.menuDiv').on('click', '.logOut', logOut);  
@@ -21,7 +23,8 @@ function modals() {
   $(document.body).on('click', '.location', getInfoForLocation);
   $(document.body).on('click', '#search-button', searchLocation);
   $(document.body).on('click', '#addLocationButton', addLocation);
-  $(document.body).on('click', '#deleteLocationButton', deleteLocation); 
+  $(document.body).on('click', '#deleteLocationButton', deleteLocation);
+  $(document.body).on('click', '#demo', showDemo); 
 	fetchCurrentUser();
 
 	function fetchUserForUserView(){
@@ -222,9 +225,20 @@ function modals() {
 		$(registerLoginModal).hide('slow');
 		$(registerModal).hide('slow');
 		$(userViewModal).hide('slow');
+		$(demoModal).hide('slow');
+		$('.tempDisplay').show('slow');
 		$('#search-form').slideDown('900', "swing")
 		menu.slideDown('700', "swing");
 	};
+
+	function showDemo(){
+		hideModals();
+		menu.hide();
+		$('.tempDisplay').hide();
+		$('#search-form').hide('slow');
+		$(demoModal).show('slow');
+	};
+
 	function showRegisterLogin() {
 		hideModals();
 		menu.hide();
@@ -291,20 +305,17 @@ function modals() {
 		var savedLocationsDiv = $('<div>').attr('id', 'savedLocations');
 		savedLocationsDiv.empty();
 		console.log(data.current_user + "!")
-
-
-		// 									.append($('<button>'))
-		// 									.attr('id', 'search-button')
-		// 									.text('search');
-		// searchForm.appendTo($('.menuDiv'));									
+								
 											
 		$('<h1>').text('weather scape').prependTo($('.menuDiv'));
 		if ( (data.current_user && data.current_user !== "null")  ) {
 		  var welcomMessage = $('<h2>').text('hi, ' + data.current_user.username);
 		  var savedLocations = $('<h3>').text('saved locations').attr('id', 'userViewLink')
 		  var logOutText = $('<h2>').addClass("logOut").text('log out')
+		  var demoMode = $('<h2>').attr('id', 'demo').text('demo mode');
 		  $('.menuDiv').append(welcomMessage)
-		               .append(logOutText);
+		               .append(logOutText)
+		               .append(demoMode);
 			var searchForm = $('<div>').attr('id', 'search-form')
 			 $("<input id='search-form' type='text' placeholder='location' autofocus='falser' />")
 			 	.attr('id', 'search-input')
@@ -316,7 +327,9 @@ function modals() {
 		  savedLocationsDiv.append(savedLocations).appendTo($('.menuDiv')) 
 			} else {
 			  loginRegisterLink = $('<h2>').attr('id', 'loginRegisterLink').text(' log in / register ')
-			  $('.menuDiv').append(loginRegisterLink);  
+		  	var demoMode = $('<h2>').attr('id', 'demo').text('demo mode');
+			  $('.menuDiv').append(loginRegisterLink)
+			  						 .append(demoMode);	
 		  	var searchForm = $('<div>').attr('id', 'search-form')
 				$("<input id='search-form' type='text' placeholder='location' autofocus='falser' />")
 			 	.attr('id', 'search-input')

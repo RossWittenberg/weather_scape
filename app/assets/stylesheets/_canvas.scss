@@ -29,6 +29,7 @@
 	z-index: 12;
 }	
 .fog{
+	-webkit-transform: translate3d(0,0,0);
 	position: fixed;
 	width: 100%;
 	height: 100%;

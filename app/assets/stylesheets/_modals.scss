@@ -266,6 +266,45 @@ modal {
 		}
 	}	
 }
+#demoModal {
+	width: 50%;
+	height: 525px;
+	top: 0%;
+	left: -5%;
+	h1{
+		color: dimgray;
+		font-size: 28px;
+		font-weight: 400;
+		position: absolute;
+		left: 100px;
+	}
+	#demo-container {
+		position: absolute;
+		top: 50px;
+		left: 100px;
+		overflow: auto;
+		button {
+			border-radius: 8px;
+			font-weight: 300;
+			font-family: Quicksand;
+			font-size: 16px;
+			border: none;
+			background-color: dimgray;
+			color: #999999;
+			text-align: center;
+			&:hover{
+				background-color: skyblue;
+				color: whitesmoke;
+				cursor: pointer;
+			}
+		}
+		h2 {
+			font-weight: 300;
+			font-size: 24px;
+		}
+	}
+}
+
 
 
 
