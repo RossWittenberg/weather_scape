@@ -4,11 +4,14 @@ function drawTree(currentSeason){
 	if (currentSeason === 'tropical'){
 		var palmTree = $("<img>")
 		.attr({ id: 'palmTree',
-						src: 'assets/palm_tree-a823538f31f348009b2acdcd65ccd19f.png'
+						src: 'assets/images/palm_tree.png'
 		});
 		palmTree.appendTo(treeDiv);												 
 	} else if (currentSeason === 'arctic'){
-			return
+			var igloo = $("<img>")
+			.attr({ id: 'igloo',
+						  src: 'assets/images/igloo.png'
+		});
 	} else {
 		var temperateTree = $('<img>').attr({
 			src: 'assets/temperate_trees-2b597ef0210d7c18af7db0465303bd12.png',
