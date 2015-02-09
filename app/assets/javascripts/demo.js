@@ -22,7 +22,6 @@ function initDemo () {
 	$('#demoModal').on('click', '#demo-snow', snow);
 	$('#demoModal').on('click', '#demo-blizzard', blizzard);
 	$('#demoModal').on('click', '#demo-fog', fog);
-	$('#demoModal').on('click', '#demo-reset', reset);
 
 }
 
