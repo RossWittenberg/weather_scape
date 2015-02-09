@@ -123,7 +123,19 @@ function lightning(){
 }
 
 function clearSkies(clouds){
-	if (clouds.length){
+	var rainDiv = $('.rain');
+	rainDiv.empty();
+	var blizzardDiv = $('.blizzard');
+	blizzardDiv.hide();
+	var snowDiv = $('.snow');
+	snowDiv.hide();
+	var clouds = cloudCover * 85;
+	var fogDiv = $('.fog');
+	fogDiv.hide();
+	lightningDiv = $('.lightning');
+	clearInterval(lightningInterval)
+	
+	if (clouds > 0){
 	drawClouds(clouds, 'whitesmoke', .3)
 	} else { 
 	drawClouds( 2, 'whitesmoke', .3)
