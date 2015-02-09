@@ -19,6 +19,7 @@
 @import "weather";
 @import url(http://fonts.googleapis.com/css?family=Quicksand:300,400,700);
 
+
 body {
 	margin: 0;
 	overflow: hidden;
@@ -46,7 +47,7 @@ body {
 			height: auto;
 			font-weight: 400;
 			font-size: 20px;
-			line-height: 5%;
+			line-height: 100%;
 			color: whitesmoke;
 		}
 		h3 {

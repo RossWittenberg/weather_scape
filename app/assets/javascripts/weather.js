@@ -17,7 +17,7 @@ function getInfoForLocation(){
 }
 
 function renderInfoForLocation(data){
-	console.log('rendering info for location' + data )
+	console.log('rendering info for location' + data.name )
 
 	var locationName = data.name;
 	var description = data.search_results.currently.icon;
@@ -54,6 +54,7 @@ function randRange( minNum, maxNum) {
 
 function rain(drops) {
 	var rainDiv = $('.rain');
+	rainDiv.empty();
 	for( i=1;i<drops;i++) {
 		var dropLeft = randRange(0,1600);
 		var dropTop = randRange(-1000,1400);
@@ -96,24 +97,24 @@ function determineWeather( description, stormDistance, cloudCover ){
 		windy(clouds);
 	} else if ( description === 'fog' ) {
 		fog(clouds);
-	} else if ( description === 'cloudly' ) {
+	} else if ( description === 'cloudy' ) {
 		cloudy(clouds);
 	} else if ( description === 'sleet' ) {
 		rain(800);
 		snow(clouds);
 	} else if ( ( description === 'partly-cloudy-day' ) || ( description === 'partly-cloudy-night' ) ){
-		partlyCloudly();
+		partlyCloudy();
 	}      
 };
 
 function storm(description){
 	if ( description === 'rain' ){
-		heavyRain(.7)
+		heavyRain(150)
+		lightningInterval = setInterval(function(){
+			lightning()}, 3000);
 	} else if ( description === 'snow' ){
-		heavySnow(.7);
+		heavySnow(150);
 	}
-	lightningInterval = setInterval(function(){
-		lightning()}, 3000);
 };
 
 function lightning(){
@@ -125,27 +126,31 @@ function lightning(){
 }
 
 function clearSkies(clouds){
+	if (clouds.length){
 	drawClouds(clouds, 'whitesmoke', .3)
+	} else { 
+	drawClouds( 2, 'whitesmoke', .3)
+	};
 }
 
 function mostlySunny(clouds){
-	if (clouds){
+	if (clouds > 0 ){
 	drawClouds(clouds, 'whitesmoke', .3)
 	} else { 
 	drawClouds( 10, 'whitesmoke', .3)
 	};
 }
 
-function partlyCloudly(clouds){
-	if (clouds){
+function partlyCloudy(clouds){
+	if (clouds > 0 ){
 	drawClouds(clouds, 'whitesmoke', .3)
 	} else { 
 	drawClouds( 50, 'whitesmoke', .3)
 	};
 }
 
-function cloudly(clouds){
-	if (clouds){
+function cloudy(clouds){
+	if (clouds > 0 ){
 	drawClouds(clouds, 'whitesmoke', .3)
 	} else { 
 	drawClouds( 100, 'whitesmoke', .3)
@@ -153,7 +158,7 @@ function cloudly(clouds){
 }
 
 function overcast(clouds){
-	if (clouds){
+	if (clouds > 0 ){
 	drawClouds(clouds, 'whitesmoke', .3)
 	} else { 
 	drawClouds( 150, 'whitesmoke', .3)
@@ -168,17 +173,17 @@ function snow(clouds){
 }
 
 function heavySnow(clouds){
-	if (clouds){
+	if (clouds > 0 ){
 	drawClouds(clouds, 'whitesmoke', .3)
 	} else { 
-	drawClouds( 75, 'whitesmoke', .3)
+	drawClouds( 150, 'whitesmoke', .3)
 	};
 	var blizzardDiv = $('.blizzard')
 	blizzardDiv.show()
 }
 
 function blizzard(clouds){
-	if (clouds){
+	if (clouds > 0 ){
 	drawClouds(clouds, 'whitesmoke', .3)
 	} else { 
 	drawClouds( 75, 'whitesmoke', .3)
@@ -192,7 +197,7 @@ function blizzard(clouds){
 
 
 function rainShowers(clouds){
-	if (clouds){
+	if (clouds > 0 ){
 	drawClouds(clouds, 'whitesmoke', .3)
 	} else { 
 	drawClouds( 75, 'whitesmoke', .3)
@@ -201,16 +206,16 @@ function rainShowers(clouds){
 }
 
 function heavyRain(clouds){
-	if (clouds){
+	if (clouds > 0 ){
 	drawClouds(clouds, 'whitesmoke', .3)
 	} else { 
-	drawClouds( 80, 'whitesmoke', .3)
+	drawClouds( 150, 'whitesmoke', .3)
 	};
 	rain(1500);
 }
 
 function fog(clouds){
-	if (clouds){
+	if (clouds > 0 ){
 	drawClouds(clouds, 'whitesmoke', .3)
 	} else { 
 	drawClouds( 25, 'whitesmoke', .3)
@@ -223,7 +228,11 @@ function windy(clouds){
 	console.log('Ross!! make windy fxn')
 }
 
-
+function reset(){
+	spring();
+	day();
+	determineWeather('clear-day', 50, .1);
+}
 
 
 

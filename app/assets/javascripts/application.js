@@ -25,6 +25,7 @@ $(function() {
 
 function init(){
 	initModals()
+	initDemo()
 	getRandomDefaultLocation();
 	window.addEventListener('resize', onWindowResize, false);
 };
