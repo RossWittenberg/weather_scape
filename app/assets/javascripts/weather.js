@@ -90,9 +90,6 @@ function determineWeather( description, stormDistance, cloudCover ){
 		rainShowers(clouds);
 	} else if ( description === 'snow' ) {
 		snow(clouds);
-	} else if ( description === 'sleet' ) {
-		rain(800);
-		snow(clouds);
 	} else if ( description === 'wind' ) {
 		windy(clouds);
 	} else if ( description === 'fog' ) {
@@ -134,6 +131,7 @@ function clearSkies(clouds){
 }
 
 function mostlySunny(clouds){
+	reset()
 	if (clouds > 0 ){
 	drawClouds(clouds, 'whitesmoke', .3)
 	} else { 
@@ -142,6 +140,7 @@ function mostlySunny(clouds){
 }
 
 function partlyCloudy(clouds){
+	reset()
 	if (clouds > 0 ){
 	drawClouds(clouds, 'whitesmoke', .3)
 	} else { 
@@ -150,6 +149,7 @@ function partlyCloudy(clouds){
 }
 
 function cloudy(clouds){
+	reset()
 	if (clouds > 0 ){
 	drawClouds(clouds, 'whitesmoke', .3)
 	} else { 
@@ -158,6 +158,7 @@ function cloudy(clouds){
 }
 
 function overcast(clouds){
+	reset()
 	if (clouds > 0 ){
 	drawClouds(clouds, 'whitesmoke', .3)
 	} else { 
@@ -167,12 +168,18 @@ function overcast(clouds){
 
 
 function snow(clouds){
-	drawClouds(clouds, 'whitesmoke', .4)
+	reset()
+	if (clouds > 0 ){
+	drawClouds(clouds, 'whitesmoke', .3)
+	} else { 
+	drawClouds( 100, 'whitesmoke', .3)
+	};
 	var snowDiv = $('.snow')
 	snowDiv.show()
 }
 
 function heavySnow(clouds){
+	reset()
 	if (clouds > 0 ){
 	drawClouds(clouds, 'whitesmoke', .3)
 	} else { 
@@ -183,6 +190,7 @@ function heavySnow(clouds){
 }
 
 function blizzard(clouds){
+	reset()
 	if (clouds > 0 ){
 	drawClouds(clouds, 'whitesmoke', .3)
 	} else { 
@@ -197,6 +205,7 @@ function blizzard(clouds){
 
 
 function rainShowers(clouds){
+	reset()
 	if (clouds > 0 ){
 	drawClouds(clouds, 'whitesmoke', .3)
 	} else { 
@@ -206,6 +215,7 @@ function rainShowers(clouds){
 }
 
 function heavyRain(clouds){
+	reset()
 	if (clouds > 0 ){
 	drawClouds(clouds, 'whitesmoke', .3)
 	} else { 
@@ -215,6 +225,7 @@ function heavyRain(clouds){
 }
 
 function fog(clouds){
+	reset()
 	if (clouds > 0 ){
 	drawClouds(clouds, 'whitesmoke', .3)
 	} else { 
@@ -225,12 +236,17 @@ function fog(clouds){
 }
 
 function windy(clouds){
-	console.log('Ross!! make windy fxn')
+	reset()
+	console.log('make windy fxn')
+}
+
+function sleet(clouds){
+	rainShowers();
+	var snowDiv = $('.snow')
+	snowDiv.show()
 }
 
 function reset(){
-	spring();
-	day();
 	determineWeather('clear-day', 50, .1);
 }
 
