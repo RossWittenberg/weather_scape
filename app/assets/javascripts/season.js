@@ -73,7 +73,7 @@ function fall(){
 };
 
 function arctic() {
-	currentSeason = 'artcic'
+	currentSeason = 'arctic'
 	drawGrass('aliceblue', 'white');
 	drawTree(currentSeason);
 	drawLeaves();
