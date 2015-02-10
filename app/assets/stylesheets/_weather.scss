@@ -30,7 +30,7 @@
 }	
 // rain
 .rain {
-	// -webkit-transform: translateZ(0);
+	-webkit-transform: translateZ(0);
 	.rainDrop {
 	  background:-webkit-gradient(linear,0% 0%,0% 100%, from(rgba(105,105,105,.9) ), to(rgba(211,211,211,0.4))  );
 	  background: -moz-linear-gradient(top, rgba(105,105,105,.9) 0%, rgba(211,211,211,.4) 100%);
