@@ -56,7 +56,7 @@ function rain(drops) {
 	var rainDiv = $('.rain');
 	rainDiv.empty();
 	for( i=1;i<drops;i++) {
-		var dropLeft = randRange(0,1600);
+		var dropLeft = randRange(0,2200);
 		var dropTop = randRange(-1000,1400);
 		$('<div>').addClass('rainDrop')
 							.attr('id', 'rainDrop'+i)
@@ -176,7 +176,6 @@ function overcast(clouds){
 	drawClouds( 150, 'whitesmoke', .3)
 	};
 }
-
 
 function snow(clouds){
 	reset()
