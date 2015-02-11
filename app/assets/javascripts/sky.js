@@ -11,7 +11,7 @@ function drawSky(color1, color2, color3){
 	gradient.addColorStop(1, color3);
 	skyContext.fillStyle = gradient;
 	skyContext.fillRect(0,0,width,height);
-	if (currentTimeOfDay === 'night'){
+	if (currentTimeOfDay === 'night' || currentTimeOfDay === 'dusk' ){
 		console.log('adding stars')
 		for (var i = 0; i < 100; i++) {
 			var centerX = Math.random() * width;

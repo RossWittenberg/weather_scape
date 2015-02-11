@@ -17,7 +17,7 @@ function determineTimeOfDay(timeOfDayAtLocation, offset, sunsetTime, sunriseTime
 function dawn(){
 	currentTimeOfDay = 'dawn';
 	drawSky("indigo", "lightpink", "peachpuff" );
-	drawOrb();
+	drawOrb("coral");
 };
 
 function day(){
@@ -30,7 +30,7 @@ function day(){
 function dusk(){
 	currentTimeOfDay = 'dusk';
 	drawSky("blueviolet", "palevioletred", "peachpuff");
-	drawOrb();
+	drawOrb("coral");
 	console.log(currentTimeOfDay)
 };
 
