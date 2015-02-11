@@ -92,8 +92,17 @@ body {
 			left: 422px;
 			font-weight: 400;
 			font-size: 18px;
-			cursor: pointer;
 			color: whitesmoke;
+			&:hover {
+				cursor: pointer;
+				color: darkorange;
+			}
+			&#userName {
+				&:hover {
+					cursor: default;
+					color: whitesmoke;
+				}
+			}
 		}
 		h3 {
 			display: inline-block;
@@ -102,7 +111,6 @@ body {
 			left: 25px;
 			font-weight: 400;
 			font-size: 24px;
-			cursor: pointer;
 			color: whitesmoke;
 		}
 	#savedLocations{
@@ -112,7 +120,7 @@ body {
 		top: 101px;
 		h3{
 			&:hover{
-					color: forestgreen;
+					color: darkorange;
 					cursor: pointer;
 			}
 		}

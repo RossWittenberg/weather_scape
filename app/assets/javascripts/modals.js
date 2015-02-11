@@ -310,7 +310,7 @@ function modals() {
 											
 		$('<h1>').text('weather scape').prependTo($('.menuDiv'));
 		if ( (data.current_user && data.current_user !== "null")  ) {
-		  var welcomMessage = $('<h2>').text('hi, ' + data.current_user.username);
+		  var welcomMessage = $('<h2>').text('hi, ' + data.current_user.username).attr('id', 'userName');;
 		  var savedLocations = $('<h3>').text('saved locations').attr('id', 'userViewLink')
 		  var logOutText = $('<h2>').addClass("logOut").text('log out')
 		  var demoMode = $('<h2>').attr('id', 'demo').text('demo mode');
