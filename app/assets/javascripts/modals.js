@@ -286,10 +286,11 @@ function modals() {
 	}
 
 	function newRegister(){
+		console.log('new register')
 		$.ajax({ 
 		    type: "POST",
 		    url: '/new_user',
-		    data: {"user" :{ username: $('#regName').val(), password: $('#regPW').val(), password_confirmation: $('#regPWcon').val()  },
+		    data: {"user" :{ username: $('#regName').val(), password: $('#regPW').val(), password_confirmation: $('#regPWcon').val() } },
 				success: function (data) {
 		      renderMenu(data)
 		    },
@@ -297,7 +298,7 @@ function modals() {
 		    	console.log(data)
 		     	$('<p>').text("the username or password you have entered is correct. please try again").appendTo(registerModal)
 		    } 
-		}}).done(renderMenu);
+		});
 	}
 
 	function renderMenu(data){ 
