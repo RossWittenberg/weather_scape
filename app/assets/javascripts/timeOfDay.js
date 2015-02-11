@@ -8,13 +8,13 @@ function determineTimeOfDay(timeOfDayAtLocation, offset, sunsetTime, sunriseTime
 	} else if ( ( hourOfTheClock >= sunset -1  ) && ( hourOfTheClock <= sunset + 1  )  ){
 		dusk();
 	} else if ( (hourOfTheClock > sunrise + 1 ) && ( hourOfTheClock < sunset - 1 ) ){
-		day(hourOfTheClock);
+		day();
 	} else {
 		night();
 	}
 }
 
-function dawn(hourOfTheClock){
+function dawn(){
 	currentTimeOfDay = 'dawn';
 	drawSky("indigo", "lightpink", "peachpuff" );
 	drawOrb();
@@ -44,7 +44,7 @@ function night(){
 function stormDay(){
 	var rainDiv = $('.rain');
 	rainDiv.empty();
-	rain(2000);
+	storm('rain');
 	currentTimeOfDay = 'stormDay';
 	drawSky("dimgray", "steelblue", "lightsteelblue");
 	drawClouds(100, 'darkgray', .5)
@@ -55,7 +55,7 @@ function stormDay(){
 function stormNight(){
 	var rainDiv = $('.rain');
 	rainDiv.empty();
-	rain(2000);
+	storm('rain');
 	currentTimeOfDay = 'stormNight';
 	drawSky("black", "dimgray", "midnightblue");
 	drawClouds(100, 'lightgray', .5)
