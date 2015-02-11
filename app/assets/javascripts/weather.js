@@ -109,9 +109,9 @@ function storm(description){
 		heavyRain(150)
 		lightningInterval = setInterval(function(){
 			lightning()}, 3000);
-	} else if ( description === 'snow' ){
+	} else if  ( description === 'snow' ){
 		heavySnow(150);
-	}
+	};
 };
 
 function lightning(){
@@ -251,12 +251,18 @@ function windy(clouds){
 }
 
 function sleet(clouds){
+	reset()
 	rainShowers();
 	var snowDiv = $('.snow')
 	snowDiv.show()
 }
 
 function reset(){
+	if ( currentTimeOfDay === "stormDay") {
+		day();
+	} else if ( currentTimeOfDay === "stormNight" ){
+		night();
+	}
 	determineWeather('clear-day', 50, .1);
 }
 

@@ -1,7 +1,18 @@
-@-webkit-keyframes orbMove { from { margin-left:0%; } to { margin-left:100%; }  }
-@-moz-keyframes orbMove { from { margin-left:0%; } to { margin-left:100%; }  }
-@-o-keyframes orbMove { from { margin-left:0%; } to { margin-left:100%; }  }
-@keyframes orbMove { from { margin-left:0%; } to { margin-left:100%; }  }
+@-webkit-keyframes orbMove { from { margin-left:-5%; } to { margin-left:100%; }  }
+@-moz-keyframes orbMove { from { margin-left:-5%; } to { margin-left:100%; }  }
+@-o-keyframes orbMove { from { margin-left:-5%; } to { margin-left:100%; }  }
+@keyframes orbMove { from { margin-left:-5%; } to { margin-left:100%; }  }
+
+// animation for clouds
+@-webkit-keyframes blow {
+	to {margin-left:200px;}
+}
+@-moz-keyframes blow {
+	to {margin-left:200px;}
+}
+@-ms-keyframes blow {
+	to {margin-left:200px;}
+}
 
 #grass {
 	position: fixed;
@@ -16,8 +27,15 @@
 #clouds {
 	position: fixed;
 	top: 0;
-	width: 100%;
+	width: 200%;
 	height: 50%;
+	z-index: 3;
+}
+.cloud {
+	overflow: visible;
+	-webkit-animation: blow 300s linear infinite;
+  -moz-animation: blow 300s linear infinite;
+  -ms-animation: blow 300s linear infinite;
 	z-index: 3;
 }
 #leaves {
@@ -41,7 +59,10 @@
 #orb {
 	position: absolute;
 	top: 40px;
-	left: 65%;
+	left: 60%;
+	-webkit-animation: orbMove 3800s linear infinite;
+  -moz-animation: orbMove 3800s linear infinite;
+  -ms-animation: orbMove 3800s linear infinite;
 	z-index: 2;
 }
 #stars {

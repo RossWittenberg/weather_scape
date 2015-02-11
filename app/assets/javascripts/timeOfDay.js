@@ -16,7 +16,7 @@ function determineTimeOfDay(timeOfDayAtLocation, offset, sunsetTime, sunriseTime
 
 function dawn(hourOfTheClock){
 	currentTimeOfDay = 'dawn';
-	drawSky("peachpuff", "palevioletred", "blueviolet" );
+	drawSky("indigo", "lightpink", "peachpuff" );
 	drawOrb();
 };
 
