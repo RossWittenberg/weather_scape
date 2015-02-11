@@ -1,5 +1,7 @@
 class UsersController < ApplicationController
 	
+	helper_method :authenticate
+
 	def create
 		@user = User.new(user_params)
 		if @user.save 
