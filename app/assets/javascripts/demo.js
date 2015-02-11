@@ -27,6 +27,12 @@ function initDemo () {
 
 function demoStorm(){
 	reset();
+	if ( currentTimeOfDay === "day") {
+		stormDay();
+	} else if ( currentTimeOfDay === "night" ){
+		stormNight();
+	} else {
 	storm('rain');
+	}
 }
 

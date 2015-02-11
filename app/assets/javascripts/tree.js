@@ -15,7 +15,7 @@ function drawTree(currentSeason){
 		igloo.appendTo(treeDiv);
 	} else {
 		var temperateTree = $('<img>').attr({
-			src: 'assets/temperate_trees-2b597ef0210d7c18af7db0465303bd12.png',
+			src: 'assets/images/temperate_trees.png',
 			id: 'temperateTrees'
 		});
 		temperateTree.appendTo(treeDiv);
